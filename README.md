@@ -29,6 +29,7 @@ The component provides several validators but you are able to write your own val
 | `Nia\Validation\LengthValidator` | Checks if the length of the content is between a specific range. |
 | `Nia\Validation\NullValidator` | Null validator object. |
 | `Nia\Validation\NumberValidator` | Checks if the content is a valid number (integer). |
+| `Nia\Validation\OrCompositeValidator` | Logical OR composite validator is used to combine multiple validators and use them as one. If one inner validator is successfull the entire composite is successfully. |
 | `Nia\Validation\RangeValidator` | Checks if the content is between a specific range. |
 | `Nia\Validation\RegexValidator` | Checks the content against a regex. |
 | `Nia\Validation\TimeValidator` | Checks if the content is a valid time. |
