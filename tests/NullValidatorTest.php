@@ -12,6 +12,7 @@ namespace Test\Nia\Validation;
 
 use PHPUnit_Framework_TestCase;
 use Nia\Validation\NullValidator;
+use Nia\Collection\Map\StringMap\Map;
 
 /**
  * Unit test for \Nia\Validation\NullValidator.
@@ -26,7 +27,7 @@ class NullValidatorTest extends PHPUnit_Framework_TestCase
     {
         $validator = new NullValidator();
 
-        $this->assertSame([], $validator->validate('foo bar'));
+        $this->assertSame([], $validator->validate('foo bar', new Map()));
     }
 }
 

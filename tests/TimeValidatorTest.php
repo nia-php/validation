@@ -29,7 +29,7 @@ class TimeValidatorTest extends PHPUnit_Framework_TestCase
     {
         $validator = new TimeValidator();
 
-        $this->assertEquals($expected, $validator->validate($content));
+        $this->assertEquals($expected, $validator->validate($content, new Map()));
     }
 
     public function validateProvider()

@@ -11,6 +11,7 @@ declare(strict_types = 1);
 namespace Nia\Validation;
 
 use Nia\Collection\Map\StringMap\Map;
+use Nia\Collection\Map\StringMap\MapInterface;
 use Nia\Validation\Violation\Violation;
 
 /**
@@ -23,9 +24,9 @@ class DateValidator implements ValidatorInterface
      *
      * {@inheritDoc}
      *
-     * @see \Nia\Validation\ValidatorInterface::validate($content)
+     * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
-    public function validate(string $content): array
+    public function validate(string $content, MapInterface $context): array
     {
         $violations = [];
         $context = new Map([

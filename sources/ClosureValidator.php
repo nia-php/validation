@@ -11,6 +11,7 @@ declare(strict_types = 1);
 namespace Nia\Validation;
 
 use Closure;
+use Nia\Collection\Map\StringMap\MapInterface;
 
 /**
  * Validator using a closure.
@@ -40,13 +41,13 @@ class ClosureValidator implements ValidatorInterface
      *
      * {@inheritDoc}
      *
-     * @see \Nia\Validation\ValidatorInterface::validate($content)
+     * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
-    public function validate(string $content): array
+    public function validate(string $content, MapInterface $context): array
     {
         $closure = $this->closure;
 
-        return $closure($content);
+        return $closure($content, $context);
     }
 }
 

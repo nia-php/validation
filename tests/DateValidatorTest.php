@@ -29,7 +29,7 @@ class DateValidatorTest extends PHPUnit_Framework_TestCase
     {
         $validator = new DateValidator();
 
-        $this->assertEquals($expected, $validator->validate($content));
+        $this->assertEquals($expected, $validator->validate($content, new Map()));
     }
 
     public function validateProvider()

@@ -10,6 +10,8 @@
 declare(strict_types = 1);
 namespace Nia\Validation;
 
+use Nia\Collection\Map\StringMap\MapInterface;
+
 /**
  * Composite validator implementation.
  */
@@ -40,14 +42,14 @@ class CompositeValidator implements CompositeValidatorInterface
      *
      * {@inheritDoc}
      *
-     * @see \Nia\Validation\ValidatorInterface::validate($content)
+     * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
-    public function validate(string $content): array
+    public function validate(string $content, MapInterface $context): array
     {
         $violations = [];
 
         foreach ($this->validators as $validator) {
-            $violations = array_merge($violations, $validator->validate($content));
+            $violations = array_merge($violations, $validator->validate($content, $context));
         }
 
         return $violations;

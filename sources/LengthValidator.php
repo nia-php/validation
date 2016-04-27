@@ -11,8 +11,9 @@ declare(strict_types = 1);
 namespace Nia\Validation;
 
 use InvalidArgumentException;
-use Nia\Validation\Violation\Violation;
 use Nia\Collection\Map\StringMap\Map;
+use Nia\Collection\Map\StringMap\MapInterface;
+use Nia\Validation\Violation\Violation;
 
 /**
  * Checks if the length of the content is between a specific range.
@@ -57,9 +58,9 @@ class LengthValidator implements ValidatorInterface
      *
      * {@inheritDoc}
      *
-     * @see \Nia\Validation\ValidatorInterface::validate($content)
+     * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
-    public function validate(string $content): array
+    public function validate(string $content, MapInterface $context): array
     {
         $violations = [];
         $context = new Map([

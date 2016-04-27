@@ -29,7 +29,7 @@ class EmailAddressValidatorTest extends PHPUnit_Framework_TestCase
     {
         $validator = new EmailAddressValidator();
 
-        $this->assertEquals($expected, $validator->validate($content));
+        $this->assertEquals($expected, $validator->validate($content, new Map()));
     }
 
     public function validateProvider()
