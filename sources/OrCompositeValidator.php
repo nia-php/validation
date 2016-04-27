@@ -10,6 +10,8 @@
 declare(strict_types = 1);
 namespace Nia\Validation;
 
+use Nia\Collection\Map\StringMap\MapInterface;
+
 /**
  * Logical OR composite validator implementation.
  *
@@ -43,14 +45,14 @@ class OrCompositeValidator implements CompositeValidatorInterface
      *
      * {@inheritDoc}
      *
-     * @see \Nia\Validation\ValidatorInterface::validate($content)
+     * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
-    public function validate(string $content): array
+    public function validate(string $content, MapInterface $context): array
     {
         $result = [];
 
         foreach ($this->validators as $validator) {
-            $violations = $validator->validate($content);
+            $violations = $validator->validate($content, $context);
 
             if (count($violations) === 0) {
                 return [];

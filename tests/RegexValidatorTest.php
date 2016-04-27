@@ -29,7 +29,7 @@ class RegexValidatorTest extends PHPUnit_Framework_TestCase
     {
         $validator = new RegexValidator($regex, $violationId, $violationMessage);
 
-        $this->assertEquals($expected, $validator->validate($content));
+        $this->assertEquals($expected, $validator->validate($content, new Map()));
     }
 
     public function validateProvider()

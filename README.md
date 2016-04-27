@@ -40,5 +40,5 @@ The following sample shows you how to use the `Nia\Validation\EmailAddressValida
 
 ```php
 	$validator = new EmailAddressValidator();
-	$violations = $formatter->validate('foobar@my-super-cool-email-address.tld');
+	$violations = $formatter->validate('foobar@my-super-cool-email-address.tld', new Map());
 ```

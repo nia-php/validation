@@ -15,6 +15,7 @@ use Nia\Validation\OrCompositeValidator;
 use Nia\Validation\NullValidator;
 use Nia\Validation\ClosureValidator;
 use Nia\Validation\Violation\ViolationInterface;
+use Nia\Collection\Map\StringMap\MapInterface;
 
 /**
  * Unit test for \Nia\Validation\OrCompositeValidator.
@@ -28,8 +29,9 @@ class OrCompositeValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidate()
     {
         $violation = $this->getMock(ViolationInterface::class);
+        $context = $this->getMock(MapInterface::class);
 
-        $validator1 = new ClosureValidator(function (string $content) use($violation) {
+        $validator1 = new ClosureValidator(function (string $content, MapInterface $context) use($violation) {
             return [
                 $violation
             ];
@@ -46,7 +48,7 @@ class OrCompositeValidatorTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame([
             $violation
-        ], $validator->validate('abc'));
+        ], $validator->validate('abc', $context));
 
         $this->assertSame($validator, $validator->addValidator($validator2));
 
@@ -55,6 +57,6 @@ class OrCompositeValidatorTest extends PHPUnit_Framework_TestCase
             $validator2
         ], $validator->getValidators());
 
-        $this->assertSame([], $validator->validate('abc'));
+        $this->assertSame([], $validator->validate('abc', $context));
     }
 }

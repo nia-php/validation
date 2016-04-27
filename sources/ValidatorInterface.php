@@ -10,6 +10,7 @@
 declare(strict_types = 1);
 namespace Nia\Validation;
 
+use Nia\Collection\Map\StringMap\MapInterface;
 use Nia\Validation\Violation\ViolationInterface;
 
 /**
@@ -24,8 +25,9 @@ interface ValidatorInterface
      *
      * @param string $content
      *            The content to validate.
+     * @param MapInterface $context
+     *            The context of the validation.
      * @return ViolationInterface[] List with violations. If the list is empty there is no violation occurred.
      */
-    public function validate(string $content): array;
+    public function validate(string $content, MapInterface $context): array;
 }
-
