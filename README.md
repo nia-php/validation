@@ -35,6 +35,13 @@ The component provides several validators but you are able to write your own val
 | `Nia\Validation\TimeValidator` | Checks if the content is a valid time. |
 | `Nia\Validation\UrlValidator` | Checks if the content is a well formatted url. |
 
+## Conditional Validators
+The component also provides conditional validators which are used to execute a decorated validator only if a condition is true. You are also able to write your own conditional validator by implementing the `Nia\Validation\Condition\ConditionValidatorInterface` interface.
+
+| Validator | Description |
+| --- | --- |
+| `Nia\Validation\Condition\ClosureConditionValidator` | Validator using a closure to determine whether the decorated validator is allowed to execute. |
+
 ## How to use
 The following sample shows you how to use the `Nia\Validation\EmailAddressValidator`.
 
