@@ -10,7 +10,7 @@
 declare(strict_types = 1);
 namespace Test\Nia\Validation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Nia\Validation\TimeValidator;
 use Nia\Collection\Map\StringMap\Map;
 use Nia\Validation\Violation\Violation;
@@ -18,7 +18,7 @@ use Nia\Validation\Violation\Violation;
 /**
  * Unit test for \Nia\Validation\TimeValidator.
  */
-class TimeValidatorTest extends PHPUnit_Framework_TestCase
+class TimeValidatorTest extends TestCase
 {
 
     /**
