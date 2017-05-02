@@ -10,7 +10,7 @@
 declare(strict_types = 1);
 namespace Test\Nia\Validation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Nia\Validation\EmailAddressValidator;
 use Nia\Validation\Violation\Violation;
 use Nia\Collection\Map\StringMap\Map;
@@ -18,7 +18,7 @@ use Nia\Collection\Map\StringMap\Map;
 /**
  * Unit test for \Nia\Validation\EmailAddressValidator.
  */
-class EmailAddressValidatorTest extends PHPUnit_Framework_TestCase
+class EmailAddressValidatorTest extends TestCase
 {
 
     /**

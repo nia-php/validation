@@ -10,14 +10,14 @@
 declare(strict_types = 1);
 namespace Test\Nia\Validation\Violation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Nia\Validation\Violation\Violation;
 use Nia\Collection\Map\StringMap\Map;
 
 /**
  * Unit test for \Nia\Validation\Violation\Violation.
  */
-class ViolationTest extends PHPUnit_Framework_TestCase
+class ViolationTest extends TestCase
 {
 
     /**

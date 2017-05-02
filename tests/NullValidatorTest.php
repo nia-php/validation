@@ -10,14 +10,14 @@
 declare(strict_types = 1);
 namespace Test\Nia\Validation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Nia\Validation\NullValidator;
 use Nia\Collection\Map\StringMap\Map;
 
 /**
  * Unit test for \Nia\Validation\NullValidator.
  */
-class NullValidatorTest extends PHPUnit_Framework_TestCase
+class NullValidatorTest extends TestCase
 {
 
     /**
