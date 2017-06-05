@@ -23,9 +23,13 @@ The component provides several validators but you are able to write your own val
 | --- | --- |
 | `Nia\Validation\ClosureValidator` | Validator using a closure. |
 | `Nia\Validation\CompositeValidator` | Composite validators are used to combine multiple validators and use them as one. |
+| `Nia\Validation\DateTimeValidator` | Checks if the content is a valid date time. |
 | `Nia\Validation\DateValidator` | Checks if the content is a valid date. |
 | `Nia\Validation\EmailAddressValidator` | Checks if the content is a well formatted email address. |
+| `Nia\Validation\EmailAddressDomainBlacklistedValidator` | Checks if the email address domain is blacklisted. |
 | `Nia\Validation\InSetValidator` | Checks if the content is an allowed value. |
+| `Nia\Validation\IpV4AddressValidator` | Checks if the content is a valid IPv4 address. |
+| `Nia\Validation\IpV6AddressValidator` | Checks if the content is a valid IPv6 address. |
 | `Nia\Validation\LengthValidator` | Checks if the length of the content is between a specific range. |
 | `Nia\Validation\NullValidator` | Null validator object. |
 | `Nia\Validation\NumberValidator` | Checks if the content is a valid number (integer). |

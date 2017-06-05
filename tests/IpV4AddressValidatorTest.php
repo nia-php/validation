@@ -34,14 +34,18 @@ class IpV4AddressValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["127.0.0.1", []],
     ["0.0.0.0", []],
     ["192.168.1.1", []],
-    ["", [{"id":"ipv4-address:empty", "message":"The content is empty.", "context":{}}]],
-    ["256.256.256.256", [{"id":"ipv4-address:invalid-format", "message":"The content \"{{ content }}\" is not a well formatted IPv4 address.", "context":{}}]],
-    ["aaaa", [{"id":"ipv4-address:invalid-format", "message":"The content \"{{ content }}\" is not a well formatted IPv4 address.", "context":{}}]]
+    ["", [{"id":"{$_constant(IpV4AddressValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["256.256.256.256", [{"id":"{$_constant(IpV4AddressValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a well formatted IPv4 address.", "context":{}}]],
+    ["aaaa", [{"id":"{$_constant(IpV4AddressValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a well formatted IPv4 address.", "context":{}}]]
 ]
 EOL;
 

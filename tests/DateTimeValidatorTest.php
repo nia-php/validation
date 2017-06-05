@@ -34,17 +34,21 @@ class DateTimeValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["2016-01-30 23:59:59", []],
-    ["", [{"id":"date-time:empty", "message":"The content is empty.", "context":{}}]],
-    ["2015-08-32 23:59:59", [{"id":"date-time:invalid-date", "message":"The content \"{{ content }}\" contains an invalid date.", "context":{}}]],
-    ["2015-02-29 23:59:59", [{"id":"date-time:invalid-date", "message":"The content \"{{ content }}\" contains an invalid date.", "context":{}}]],
-    ["2015-07-15 24:00:00", [{"id":"date-time:invalid-time", "message":"The content \"{{ content }}\" contains an invalid time.", "context":{}}]],
-    ["2015-07-15 23:60:61", [{"id":"date-time:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted date time.", "context":{}}]],
-    ["a-b-c", [{"id":"date-time:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted date time.", "context":{}}]],
-    ["20160101", [{"id":"date-time:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted date time.", "context":{}}]],
-    ["2016/01/01", [{"id":"date-time:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted date time.", "context":{}}]]
+    ["", [{"id":"{$_constant(DateTimeValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["2015-08-32 23:59:59", [{"id":"{$_constant(DateTimeValidator::VIOLATION__DATE)}", "message":"The content \"{{ content }}\" contains an invalid date.", "context":{}}]],
+    ["2015-02-29 23:59:59", [{"id":"{$_constant(DateTimeValidator::VIOLATION__DATE)}", "message":"The content \"{{ content }}\" contains an invalid date.", "context":{}}]],
+    ["2015-07-15 24:00:00", [{"id":"{$_constant(DateTimeValidator::VIOLATION__TIME)}", "message":"The content \"{{ content }}\" contains an invalid time.", "context":{}}]],
+    ["2015-07-15 23:60:61", [{"id":"{$_constant(DateTimeValidator::VIOLATION__TIME)}", "message":"The content \"{{ content }}\" contains an invalid time.", "context":{}}]],
+    ["a-b-c", [{"id":"{$_constant(DateTimeValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a valid formatted date time.", "context":{}}]],
+    ["20160101", [{"id":"{$_constant(DateTimeValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a valid formatted date time.", "context":{}}]],
+    ["2016/01/01", [{"id":"{$_constant(DateTimeValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a valid formatted date time.", "context":{}}]]
 ]
 EOL;
 

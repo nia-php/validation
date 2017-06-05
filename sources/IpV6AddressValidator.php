@@ -20,6 +20,10 @@ use Nia\Validation\Violation\Violation;
 class IpV6AddressValidator implements ValidatorInterface
 {
 
+    const VIOLATION__EMPTY = self::class . ':empty';
+
+    const VIOLATION__FORMAT = self::class . ':format';
+
     /**
      *
      * {@inheritDoc}
@@ -34,9 +38,9 @@ class IpV6AddressValidator implements ValidatorInterface
         ]);
 
         if ($content === '') {
-            $violations[] = new Violation('ipv6-address:empty', 'The content is empty.', $context);
+            $violations[] = new Violation(self::VIOLATION__EMPTY, 'The content is empty.', $context);
         } elseif (! filter_var($content, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $violations[] = new Violation('ipv6-address:invalid-format', 'The content "{{ content }}" is not a well formatted IPv6 address.', $context);
+            $violations[] = new Violation(self::VIOLATION__FORMAT, 'The content "{{ content }}" is not a well formatted IPv6 address.', $context);
         }
 
         return $violations;

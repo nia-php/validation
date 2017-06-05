@@ -20,6 +20,14 @@ use Nia\Validation\Violation\Violation;
 class DateTimeValidator implements ValidatorInterface
 {
 
+    const VIOLATION__EMPTY = self::class . ':empty';
+
+    const VIOLATION__FORMAT = self::class . ':format';
+
+    const VIOLATION__DATE = self::class . ':date';
+
+    const VIOLATION__TIME = self::class . ':time';
+
     /**
      *
      * {@inheritdoc}
@@ -36,13 +44,13 @@ class DateTimeValidator implements ValidatorInterface
         $match = [];
 
         if ($content === '') {
-            $violations[] = new Violation('date-time:empty', 'The content is empty.', $context);
-        } elseif (! preg_match('/^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2}) (?P<hour>[0-2][0-9]):(?P<minute>[0-5][0-9]):(?P<second>[0-5][0-9])$/', $content, $match)) {
-            $violations[] = new Violation('date-time:invalid-format', 'The content "{{ content }}" is not a valid formatted date time.', $context);
+            $violations[] = new Violation(self::VIOLATION__EMPTY, 'The content is empty.', $context);
+        } elseif (! preg_match('/^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2}) (?P<hour>\d{2}):(?P<minute>\d{2}):(?P<second>\d{2})$/', $content, $match)) {
+            $violations[] = new Violation(self::VIOLATION__FORMAT, 'The content "{{ content }}" is not a valid formatted date time.', $context);
         } elseif (! checkdate((int) $match['month'], (int) $match['day'], (int) $match['year'])) {
-            $violations[] = new Violation('date-time:invalid-date', 'The content "{{ content }}" contains an invalid date.', $context);
+            $violations[] = new Violation(self::VIOLATION__DATE, 'The content "{{ content }}" contains an invalid date.', $context);
         } elseif ((int) $match['hour'] >= 24 || (int) $match['minute'] >= 60 || (int) $match['second'] >= 60) {
-            $violations[] = new Violation('date-time:invalid-time', 'The content "{{ content }}" contains an invalid time.', $context);
+            $violations[] = new Violation(self::VIOLATION__TIME, 'The content "{{ content }}" contains an invalid time.', $context);
         }
 
         return $violations;

@@ -34,15 +34,19 @@ class IpV6AddressValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["::1", []],
     ["fe00::0", []],
     ["ff02::2", []],
     ["2001:0db8:85a3:08d3:1319:8a2e:0370:7334", []],
-    ["", [{"id":"ipv6-address:empty", "message":"The content is empty.", "context":{}}]],
-    ["256.256.256.256", [{"id":"ipv6-address:invalid-format", "message":"The content \"{{ content }}\" is not a well formatted IPv6 address.", "context":{}}]],
-    ["aaaa", [{"id":"ipv6-address:invalid-format", "message":"The content \"{{ content }}\" is not a well formatted IPv6 address.", "context":{}}]]
+    ["", [{"id":"{$_constant(IpV6AddressValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["256.256.256.256", [{"id":"{$_constant(IpV6AddressValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a well formatted IPv6 address.", "context":{}}]],
+    ["aaaa", [{"id":"{$_constant(IpV6AddressValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a well formatted IPv6 address.", "context":{}}]]
 ]
 EOL;
 
