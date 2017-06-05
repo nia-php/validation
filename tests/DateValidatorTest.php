@@ -10,7 +10,7 @@
 declare(strict_types = 1);
 namespace Test\Nia\Validation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Nia\Validation\DateValidator;
 use Nia\Validation\Violation\Violation;
 use Nia\Collection\Map\StringMap\Map;
@@ -18,7 +18,7 @@ use Nia\Collection\Map\StringMap\Map;
 /**
  * Unit test for \Nia\Validation\DateValidator.
  */
-class DateValidatorTest extends PHPUnit_Framework_TestCase
+class DateValidatorTest extends TestCase
 {
 
     /**

@@ -10,7 +10,7 @@
 declare(strict_types = 1);
 namespace Test\Nia\Validation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Nia\Validation\ClosureValidator;
 use Nia\Validation\Violation\ViolationInterface;
 use Nia\Collection\Map\StringMap\MapInterface;
@@ -19,7 +19,7 @@ use Nia\Collection\Map\StringMap\Map;
 /**
  * Unit test for \Nia\Validation\ClosureValidator.
  */
-class ClosureValidatorTest extends PHPUnit_Framework_TestCase
+class ClosureValidatorTest extends TestCase
 {
 
     /**
@@ -27,7 +27,7 @@ class ClosureValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testValidate()
     {
-        $violation = $this->getMock(ViolationInterface::class);
+        $violation = $this->createMock(ViolationInterface::class);
 
         $validator = new ClosureValidator(function (string $content, MapInterface $context) use($violation) {
             return [
