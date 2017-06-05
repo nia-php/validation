@@ -21,6 +21,10 @@ use Nia\Validation\Violation\Violation;
 class LengthValidator implements ValidatorInterface
 {
 
+    const VIOLATION__TOO_SHORT = self::class . ':too-short';
+
+    const VIOLATION__TOO_LONG = self::class . ':too-long';
+
     /**
      * The min range.
      *
@@ -56,7 +60,7 @@ class LengthValidator implements ValidatorInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
@@ -72,9 +76,9 @@ class LengthValidator implements ValidatorInterface
         $length = mb_strlen($content);
 
         if ($length < $this->min) {
-            $violations[] = new Violation('length:to-short', 'The content "{{ content }}" is to short, {{ min }} characters needed.', $context);
+            $violations[] = new Violation(self::VIOLATION__TOO_SHORT, 'The content "{{ content }}" is to short, {{ min }} characters needed.', $context);
         } elseif ($length > $this->max) {
-            $violations[] = new Violation('length:to-long', 'The content "{{ content }}" is to long, maximum is {{ max }} characters.', $context);
+            $violations[] = new Violation(self::VIOLATION__TOO_LONG, 'The content "{{ content }}" is to long, maximum is {{ max }} characters.', $context);
         }
 
         return $violations;

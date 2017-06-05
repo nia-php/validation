@@ -34,11 +34,15 @@ class EmailAddressValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["foo@my-high-quality-and-cool-email-address.org", []],
-    ["", [{"id":"email-address:empty", "message":"The content is empty.", "context":{}}]],
-    ["bla@bla@bla.org", [{"id":"email-address:invalid-format", "message":"The content \"{{ content }}\" is not a well formatted email address.", "context":{}}]]
+    ["", [{"id":"{$_constant(EmailAddressValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["bla@bla@bla.org", [{"id":"{$_constant(EmailAddressValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a well formatted email address.", "context":{}}]]
 ]
 EOL;
 

@@ -40,7 +40,7 @@ class CompositeValidator implements CompositeValidatorInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
@@ -57,7 +57,7 @@ class CompositeValidator implements CompositeValidatorInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\CompositeValidatorInterface::addValidator($validator)
      */
@@ -70,7 +70,7 @@ class CompositeValidator implements CompositeValidatorInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\CompositeValidatorInterface::getValidators()
      */

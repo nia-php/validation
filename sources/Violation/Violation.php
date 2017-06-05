@@ -58,7 +58,7 @@ class Violation implements ViolationInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\Violation\ViolationInterface::getId()
      */
@@ -69,7 +69,7 @@ class Violation implements ViolationInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\Violation\ViolationInterface::getMessage()
      */
@@ -80,7 +80,7 @@ class Violation implements ViolationInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\Violation\ViolationInterface::getContext()
      */

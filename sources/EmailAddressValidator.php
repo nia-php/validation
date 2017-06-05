@@ -20,9 +20,13 @@ use Nia\Validation\Violation\Violation;
 class EmailAddressValidator implements ValidatorInterface
 {
 
+    const VIOLATION__EMPTY = self::class . ':empty';
+
+    const VIOLATION__FORMAT = self::class . ':format';
+
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
@@ -34,9 +38,9 @@ class EmailAddressValidator implements ValidatorInterface
         ]);
 
         if ($content === '') {
-            $violations[] = new Violation('email-address:empty', 'The content is empty.', $context);
+            $violations[] = new Violation(self::VIOLATION__EMPTY, 'The content is empty.', $context);
         } elseif (! filter_var($content, FILTER_VALIDATE_EMAIL)) {
-            $violations[] = new Violation('email-address:invalid-format', 'The content "{{ content }}" is not a well formatted email address.', $context);
+            $violations[] = new Violation(self::VIOLATION__FORMAT, 'The content "{{ content }}" is not a well formatted email address.', $context);
         }
 
         return $violations;

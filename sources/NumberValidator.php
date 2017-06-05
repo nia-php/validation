@@ -20,9 +20,13 @@ use Nia\Validation\Violation\Violation;
 class NumberValidator implements ValidatorInterface
 {
 
+    const VIOLATION__EMPTY = self::class . ':empty';
+
+    const VIOLATION__FORMAT = self::class . ':format';
+
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
@@ -34,9 +38,9 @@ class NumberValidator implements ValidatorInterface
         ]);
 
         if ($content === '') {
-            $violations[] = new Violation('numeric:empty', 'The content is empty.', $context);
+            $violations[] = new Violation(self::VIOLATION__EMPTY, 'The content is empty.', $context);
         } elseif (! preg_match('/^[+-]?[0-9]+$/', $content)) {
-            $violations[] = new Violation('numeric:not-numeric', 'The content "{{ content }}" is not numeric.', $context);
+            $violations[] = new Violation(self::VIOLATION__FORMAT, 'The content "{{ content }}" is not numeric.', $context);
         }
 
         return $violations;

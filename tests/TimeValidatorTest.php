@@ -34,13 +34,17 @@ class TimeValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["23:12:34", []],
-    ["", [{"id":"time:empty", "message":"The content is empty.", "context":{}}]],
-    ["24:56:78", [{"id":"time:invalid-time", "message":"The content \"{{ content }}\" is not a valid time.", "context":{}}]],
-    ["00:00:60", [{"id":"time:invalid-time", "message":"The content \"{{ content }}\" is not a valid time.", "context":{}}]],
-    ["a:b:c", [{"id":"time:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted time.", "context":{}}]]
+    ["", [{"id":"{$_constant(TimeValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["24:56:78", [{"id":"{$_constant(TimeValidator::VIOLATION__TIME)}", "message":"The content \"{{ content }}\" is not a valid time.", "context":{}}]],
+    ["00:00:60", [{"id":"{$_constant(TimeValidator::VIOLATION__TIME)}", "message":"The content \"{{ content }}\" is not a valid time.", "context":{}}]],
+    ["a:b:c", [{"id":"{$_constant(TimeValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a valid formatted time.", "context":{}}]]
 ]
 EOL;
 

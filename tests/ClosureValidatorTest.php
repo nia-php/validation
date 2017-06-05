@@ -29,7 +29,7 @@ class ClosureValidatorTest extends TestCase
     {
         $violation = $this->createMock(ViolationInterface::class);
 
-        $validator = new ClosureValidator(function (string $content, MapInterface $context) use($violation) {
+        $validator = new ClosureValidator(function (string $content, MapInterface $context) use ($violation) {
             return [
                 $violation
             ];

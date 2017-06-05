@@ -34,13 +34,17 @@ class InSetValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     [["foo", "bar", "baz"], "foo", []],
     [["foo", "bar", "baz"], "bar", []],
     [["foo", "bar", "baz"], "baz", []],
-    [["foo", "bar", "baz"], "foobar", [{"id":"in-set:not-allowed", "message":"The content \"{{ content }}\" is not an allowed value. Allowed values are {{ allowed-values }}.", "context":{"allowed-values":"foo,bar,baz"}}]],
-    [[], "foobar", [{"id":"in-set:not-allowed", "message":"The content \"{{ content }}\" is not an allowed value. Allowed values are {{ allowed-values }}.", "context":{"allowed-values":""}}]]
+    [["foo", "bar", "baz"], "foobar", [{"id":"{$_constant(InSetValidator::VIOLATION__NOT_ALLOWED)}", "message":"The content \"{{ content }}\" is not an allowed value. Allowed values are {{ allowed-values }}.", "context":{"allowed-values":"foo,bar,baz"}}]],
+    [[], "foobar", [{"id":"{$_constant(InSetValidator::VIOLATION__NOT_ALLOWED)}", "message":"The content \"{{ content }}\" is not an allowed value. Allowed values are {{ allowed-values }}.", "context":{"allowed-values":""}}]]
 ]
 EOL;
 

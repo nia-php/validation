@@ -34,6 +34,10 @@ class NumberValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["0", []],
@@ -41,8 +45,8 @@ class NumberValidatorTest extends TestCase
     ["1234567890", []],
     ["-1234567890", []],
     ["+1234567890", []],
-    ["", [{"id":"numeric:empty", "message":"The content is empty.", "context":{}}]],
-    ["3.14", [{"id":"numeric:not-numeric", "message":"The content \"{{ content }}\" is not numeric.", "context":{}}]]
+    ["", [{"id":"{$_constant(NumberValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["3.14", [{"id":"{$_constant(NumberValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not numeric.", "context":{}}]]
 ]
 EOL;
 
