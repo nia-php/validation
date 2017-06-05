@@ -34,12 +34,16 @@ class RangeValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     [0, 8, "3", []],
     [3, 4, "3.14", []],
-    [0, 8, "9", [{"id":"range:out-of-range", "message":"The content \"{{ content }}\" is not between {{ min }} and {{ max }}.", "context":{}}]],
-    [0, 8, "8.1", [{"id":"range:out-of-range", "message":"The content \"{{ content }}\" is not between {{ min }} and {{ max }}.", "context":{}}]]
+    [0, 8, "9", [{"id":"{$_constant(RangeValidator::VIOLATION__RANGE)}", "message":"The content \"{{ content }}\" is not between {{ min }} and {{ max }}.", "context":{}}]],
+    [0, 8, "8.1", [{"id":"{$_constant(RangeValidator::VIOLATION__RANGE)}", "message":"The content \"{{ content }}\" is not between {{ min }} and {{ max }}.", "context":{}}]]
 ]
 EOL;
 

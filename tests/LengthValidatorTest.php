@@ -34,13 +34,17 @@ class LengthValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     [0, 8, "foo", []],
     [3, 4, "foo", []],
     [3, 4, "foob", []],
-    [4, 8, "foo", [{"id":"length:to-short", "message":"The content \"{{ content }}\" is to short, {{ min }} characters needed.", "context":{}}]],
-    [4, 8, "foo bar baz", [{"id":"length:to-long", "message":"The content \"{{ content }}\" is to long, maximum is {{ max }} characters.", "context":{}}]]
+    [4, 8, "foo", [{"id":"{$_constant(LengthValidator::VIOLATION__TOO_SHORT)}", "message":"The content \"{{ content }}\" is to short, {{ min }} characters needed.", "context":{}}]],
+    [4, 8, "foo bar baz", [{"id":"{$_constant(LengthValidator::VIOLATION__TOO_LONG)}", "message":"The content \"{{ content }}\" is to long, maximum is {{ max }} characters.", "context":{}}]]
 ]
 EOL;
 

@@ -34,15 +34,19 @@ class DateValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["2016-01-30", []],
-    ["", [{"id":"date:empty", "message":"The content is empty.", "context":{}}]],
-    ["2015-08-32", [{"id":"date:invalid-date", "message":"The content \"{{ content }}\" is not a valid date.", "context":{}}]],
-    ["2015-02-29", [{"id":"date:invalid-date", "message":"The content \"{{ content }}\" is not a valid date.", "context":{}}]],
-    ["a-b-c", [{"id":"date:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted date.", "context":{}}]],
-    ["20160101", [{"id":"date:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted date.", "context":{}}]],
-    ["2016/01/01", [{"id":"date:invalid-format", "message":"The content \"{{ content }}\" is not a valid formatted date.", "context":{}}]]
+    ["", [{"id":"{$_constant(DateValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["2015-08-32", [{"id":"{$_constant(DateValidator::VIOLATION__DATE)}", "message":"The content \"{{ content }}\" is not a valid date.", "context":{}}]],
+    ["2015-02-29", [{"id":"{$_constant(DateValidator::VIOLATION__DATE)}", "message":"The content \"{{ content }}\" is not a valid date.", "context":{}}]],
+    ["a-b-c", [{"id":"{$_constant(DateValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a valid formatted date.", "context":{}}]],
+    ["20160101", [{"id":"{$_constant(DateValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a valid formatted date.", "context":{}}]],
+    ["2016/01/01", [{"id":"{$_constant(DateValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a valid formatted date.", "context":{}}]]
 ]
 EOL;
 

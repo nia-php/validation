@@ -32,7 +32,7 @@ class CompositeValidatorTest extends TestCase
         $context = $this->createMock(MapInterface::class);
 
         $validator1 = new NullValidator();
-        $validator2 = new ClosureValidator(function (string $content, MapInterface $context) use($violation) {
+        $validator2 = new ClosureValidator(function (string $content, MapInterface $context) use ($violation) {
             return [
                 $violation
             ];

@@ -34,11 +34,15 @@ class UrlValidatorTest extends TestCase
 
     public function validateProvider()
     {
+        $_constant = function (string $value): string {
+            return addslashes($value);
+        };
+
         $content = <<<EOL
 [
     ["http://www.github.com/", []],
-    ["", [{"id":"url:empty", "message":"The content is empty.", "context":{}}]],
-    ["foo/faa/a", [{"id":"url:invalid-format", "message":"The content \"{{ content }}\" is not a well formatted URL.", "context":{}}]]
+    ["", [{"id":"{$_constant(UrlValidator::VIOLATION__EMPTY)}", "message":"The content is empty.", "context":{}}]],
+    ["foo/faa/a", [{"id":"{$_constant(UrlValidator::VIOLATION__FORMAT)}", "message":"The content \"{{ content }}\" is not a well formatted URL.", "context":{}}]]
 ]
 EOL;
 

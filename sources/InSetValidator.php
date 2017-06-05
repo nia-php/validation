@@ -20,6 +20,8 @@ use Nia\Validation\Violation\Violation;
 class InSetValidator implements ValidatorInterface
 {
 
+    const VIOLATION__NOT_ALLOWED = self::class . ':not-allowed';
+
     /**
      * List with allowed values.
      *
@@ -40,7 +42,7 @@ class InSetValidator implements ValidatorInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
@@ -53,7 +55,7 @@ class InSetValidator implements ValidatorInterface
         ]);
 
         if (! in_array($content, $this->values, true)) {
-            $violations[] = new Violation('in-set:not-allowed', 'The content "{{ content }}" is not an allowed value. Allowed values are {{ allowed-values }}.', $context);
+            $violations[] = new Violation(self::VIOLATION__NOT_ALLOWED, 'The content "{{ content }}" is not an allowed value. Allowed values are {{ allowed-values }}.', $context);
         }
 
         return $violations;

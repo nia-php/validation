@@ -31,7 +31,7 @@ class OrCompositeValidatorTest extends TestCase
         $violation = $this->createMock(ViolationInterface::class);
         $context = $this->createMock(MapInterface::class);
 
-        $validator1 = new ClosureValidator(function (string $content, MapInterface $context) use($violation) {
+        $validator1 = new ClosureValidator(function (string $content, MapInterface $context) use ($violation) {
             return [
                 $violation
             ];

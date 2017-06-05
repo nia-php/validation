@@ -20,9 +20,15 @@ use Nia\Validation\Violation\Violation;
 class TimeValidator implements ValidatorInterface
 {
 
+    const VIOLATION__EMPTY = self::class . ':empty';
+
+    const VIOLATION__FORMAT = self::class . ':format';
+
+    const VIOLATION__TIME = self::class . ':time';
+
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
@@ -36,11 +42,11 @@ class TimeValidator implements ValidatorInterface
         $match = [];
 
         if ($content === '') {
-            $violations[] = new Violation('time:empty', 'The content is empty.', $context);
+            $violations[] = new Violation(self::VIOLATION__EMPTY, 'The content is empty.', $context);
         } elseif (! preg_match('/^(?P<hour>\d{2}):(?P<minute>\d{2}):(?P<second>\d{2})$/', $content, $match)) {
-            $violations[] = new Violation('time:invalid-format', 'The content "{{ content }}" is not a valid formatted time.', $context);
+            $violations[] = new Violation(self::VIOLATION__FORMAT, 'The content "{{ content }}" is not a valid formatted time.', $context);
         } elseif (! $this->checktime((int) $match['hour'], (int) $match['minute'], (int) $match['second'])) {
-            $violations[] = new Violation('time:invalid-time', 'The content "{{ content }}" is not a valid time.', $context);
+            $violations[] = new Violation(self::VIOLATION__TIME, 'The content "{{ content }}" is not a valid time.', $context);
         }
 
         return $violations;

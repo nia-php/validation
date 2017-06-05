@@ -21,6 +21,8 @@ use Nia\Validation\Violation\Violation;
 class RangeValidator implements ValidatorInterface
 {
 
+    const VIOLATION__RANGE = self::class . ':range';
+
     /**
      * The min range.
      *
@@ -56,7 +58,7 @@ class RangeValidator implements ValidatorInterface
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Nia\Validation\ValidatorInterface::validate($content, $context)
      */
@@ -72,7 +74,7 @@ class RangeValidator implements ValidatorInterface
         $content = (float) $content;
 
         if ($content < $this->min || $content > $this->max) {
-            $violations[] = new Violation('range:out-of-range', 'The content "{{ content }}" is not between {{ min }} and {{ max }}.', $context);
+            $violations[] = new Violation(self::VIOLATION__RANGE, 'The content "{{ content }}" is not between {{ min }} and {{ max }}.', $context);
         }
 
         return $violations;
